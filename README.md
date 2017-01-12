@@ -17,4 +17,5 @@ Run it with a path to an executable as a parameter. It will then start that exec
 If it's not in the foreground, we suspend all the threads of the application by misusing Windows debugging facilities. When you try to reactivate the process, the value for the foreground window becomes NULL and then we resume the process.
 
 # Note
-The project in the solution called 'Target' is just a test application that the suspender starts when you start it via Visual studio.
+* The project in the solution called 'Target' is just a test application that the suspender starts when you start it via Visual studio.
+* Don't judge me on the code quality. It's a hack that was never intended to be released to the public. If I work on this some more, I'll make it pretty
