@@ -37,6 +37,7 @@ VOID CALLBACK TimerProc(
 	}
 	else 
 	{
+		// FIXME: Do not specify W vs A functions
 		GetWindowTextW(fgWindow, fgWindowTitle, fgWindowTitleBufLen);
 		printf("GetForegroundWindow() is: %S\n\n", fgWindowTitle);
 	}
@@ -58,6 +59,7 @@ VOID CALLBACK TimerProc(
 
 int CmdLineConcat(char *outStr, unsigned int argc, char *argv[])
 {
+	// TODO: Replace using Win32 API calls
 	unsigned int i;
 	size_t len = 0;
 	char *_all_args, *all_args;
@@ -111,16 +113,16 @@ int main(int argc, char *argv[])
 
 	// Start the child process. 
 	// TODO: We probably want to allow handles to be inheritable
-	if (!CreateProcessW(NULL,   // No module name (use command line)
-		commandLinePtr,        // Command line
-		NULL,           // Process handle not inheritable
-		NULL,           // Thread handle not inheritable
-		FALSE,          // Set handle inheritance to FALSE
-		0,              // No creation flags
-		NULL,           // Use parent's environment block
-		NULL,           // Use parent's starting directory 
-		&si,            // Pointer to STARTUPINFO structure
-		&pi)           // Pointer to PROCESS_INFORMATION structure
+	if (!CreateProcessW(NULL,		// No module name (use command line)
+		commandLinePtr,				// Command line
+		NULL,						// Process handle not inheritable
+		NULL,						// Thread handle not inheritable
+		FALSE,						// Set handle inheritance to FALSE
+		CREATE_DEFAULT_ERROR_MODE,  // Do not inherit error flags
+		NULL,						// Use parent's environment block
+		NULL,						// Use parent's starting directory 
+		&si,						// Pointer to STARTUPINFO structure
+		&pi)						// Pointer to PROCESS_INFORMATION structure
 		)
 	{
 		printf("CreateProcess failed (%d).\n", GetLastError());
