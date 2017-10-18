@@ -2,7 +2,10 @@
 Suspends processes while in the background to save laptop batteries
 
 # To do:
-* Hook window messages rather than unsuspending if foreground window is either the suspended process or NULL
+* Either:
+  * Hook window messages rather than unsuspending if foreground window is either the suspended process or NULL
+  * or find another method of detecting when the process is being reactivated, perhaps by wrapping the taskbar button or injecting a thread that is not suspended that would handle window messages while the process is suspended. I need to think about this and experiment.
+   * Look into this: https://msdn.microsoft.com/en-us/magazine/gg650659.aspx https://msdn.microsoft.com/en-us/magazine/hh148143.aspx
 * Add an easy way to force the suspender to run instead of another executable using Image execution options registry key
 * Perhaps even make an installer and uninstaller to make sure that if you use Image execution options, the registry keys are removed when you stop using the program
 * Measure the difference in battery use with and without the suspender
@@ -18,4 +21,4 @@ If it's not in the foreground, we suspend all the threads of the application by 
 
 # Note
 * The project in the solution called 'Target' is just a test application that the suspender starts when you start it via Visual studio.
-* Don't judge me on the code quality. It's a hack that was never intended to be released to the public. If I work on this some more, I'll make it pretty
+* Don't judge me on the code quality. It's a hack that was never intended to be released to the public. If I work on this some more, I'll make it pretty.
